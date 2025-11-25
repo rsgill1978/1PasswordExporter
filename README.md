@@ -5,17 +5,18 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.6+](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/downloads/)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows%20%7C%20Linux-lightgrey.svg)](https://github.com/yourusername/1PasswordExporter)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/donate/?business=GMQLBEXCL6DJY&no_recurring=0&currency_code=USD)
+[![Support](https://img.shields.io/badge/Support-Buy%20Me%20a%20Coffee-yellow.svg)](https://www.buymeacoffee.com/rsgill)
 
 **Keywords**: 1Password exporter, Apple Passwords migration, password manager migration, 1Password to Apple Passwords, .1pux converter, password export tool, 1Password alternative, iCloud Keychain import, password migration tool, free password exporter
 
 ## Quick Start Guide
 
-**Ready to migrate from 1Password to Apple Passwords?** Follow these 3 simple steps:
+**Ready to migrate from 1Password to Apple Passwords?** Follow these steps:
 
-1. **Export from 1Password**: File → Export → All Items → Choose `.1pux` format
-2. **Run the script**: `python3 1password_exporter.py inputs/your_export.1pux`
-3. **Import to Apple Passwords**: Open Passwords app → File → Import Passwords
+1. **Download this tool**: Click the green **Code** button above → **Download ZIP** → Extract it
+2. **Export from 1Password**: File → Export → All Items → Choose `.1pux` format
+3. **Run the script**: `python3 1password_exporter.py inputs/your_export.1pux`
+4. **Import to Apple Passwords**: Open Passwords app → File → Import Passwords
 
 **No installation required** - Uses only Python standard library (3.6+).
 
@@ -689,11 +690,13 @@ If Apple Passwords reports errors:
 
 ## Support This Project
 
-If you find this tool useful and it saved you time migrating your passwords, consider supporting its development:
+If this tool saved you time and money, consider buying me a coffee:
 
-[![Donate with PayPal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/donate/?business=GMQLBEXCL6DJY&no_recurring=0&currency_code=USD)
+**[☕ Buy Me a Coffee](https://www.buymeacoffee.com/rsgill)** ← Click here to support
 
-Your support helps maintain and improve this tool. Thank you!
+<a href="https://www.buymeacoffee.com/rsgill" target="_blank"><img src="assets/buymeacoffee-qr.png" alt="Buy Me a Coffee QR Code" width="200"></a>
+
+Or scan the QR code above. Your support helps maintain and improve this tool!
 
 ## Contributing
 

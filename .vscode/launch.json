@@ -1,0 +1,68 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Current File",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "1Password Exporter: Run Tests",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/1password_exporter.py",
+      "args": ["--test"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "1Password Exporter: Full Test Cycle",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/1password_exporter.py",
+      "args": ["--test-all"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "1Password Exporter: Generate Test File",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/1password_exporter.py",
+      "args": ["--generate-test"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "1Password Exporter: Cleanup",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/1password_exporter.py",
+      "args": ["--cleanup"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "1Password Exporter: Help",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/1password_exporter.py",
+      "args": ["--help"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Python: Debug Tests",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/1password_exporter.py",
+      "args": ["--test"],
+      "console": "integratedTerminal",
+      "justMyCode": false,
+      "stopOnEntry": false
+    }
+  ]
+}
