@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+title: 1Password to Apple Passwords Exporter
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - name: 1Password Exporter Contributors
+repository-code: 'https://github.com/yourusername/1PasswordExporter'
+url: 'https://github.com/yourusername/1PasswordExporter'
+abstract: >-
+  A free, open-source Python tool for migrating password vaults
+  from 1Password to Apple Passwords. Converts .1pux export files
+  to Apple Passwords-compatible CSV format while preserving
+  passwords, TOTP codes, credit cards, secure notes, and file
+  attachments. Cross-platform support for macOS, Windows, and Linux.
+keywords:
+  - 1password
+  - apple-passwords
+  - password-migration
+  - password-manager
+  - data-export
+  - 1pux-converter
+  - icloud-keychain
+  - security-tools
+license: MIT
+version: 1.2.0
+date-released: '2025-11-25'
