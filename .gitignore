@@ -102,3 +102,6 @@ yarn-error.log*
 *.swp
 *.swo
 *~.nib
+
+# Private setup instructions
+.github/SETUP.md
