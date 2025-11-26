@@ -52,6 +52,11 @@ class PasswordExporter:
         self.output_dir = output_dir if output_dir else os.path.join(script_dir, "outputs")
         self.timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
+        # Clean output directory if it exists
+        if os.path.exists(self.output_dir):
+            import shutil
+            shutil.rmtree(self.output_dir)
+
         # Create output directories
         self.passwords_csv_path = os.path.join(self.output_dir, "exported_passwords.csv")
         self.non_password_dir = os.path.join(self.output_dir, "non_password_data")
@@ -61,6 +66,7 @@ class PasswordExporter:
             "total_items": 0,
             "password_items": 0,
             "non_password_items": 0,
+            "skipped_items": 0,
             "attachments_extracted": 0,
             "errors": []
         }
@@ -188,8 +194,9 @@ class PasswordExporter:
                 }
 
                 writer.writerow(row)
-                self.stats["password_items"] += 1
 
+        # Count actual rows written (excluding header)
+        self.stats["password_items"] = len(password_items)
         print(f"Exported {self.stats['password_items']} password items to: {self.passwords_csv_path}")
 
     def sanitize_filename(self, filename: str) -> str:
@@ -504,6 +511,7 @@ class PasswordExporter:
 
                             # Skip category 005 (Password) - unused generated passwords
                             if category_uuid == "005":
+                                self.stats["skipped_items"] += 1
                                 continue
 
                             if not self.is_password_item(item):
@@ -526,9 +534,10 @@ class PasswordExporter:
         print("\n" + "="*60)
         print("EXPORT SUMMARY")
         print("="*60)
-        print(f"Total items processed: {self.stats['total_items']}")
-        print(f"Password items exported: {self.stats['password_items']}")
-        print(f"Non-password items exported: {self.stats['non_password_items']}")
+        print(f"Total items in .1pux file: {self.stats['total_items']}")
+        print(f"Password items exported (CSV): {self.stats['password_items']}")
+        print(f"Non-password items exported (text files): {self.stats['non_password_items']}")
+        print(f"Items skipped (category 005 - unused passwords): {self.stats['skipped_items']}")
         print(f"Attachments extracted: {self.stats['attachments_extracted']}")
 
         if self.stats["errors"]:
@@ -874,6 +883,10 @@ def cleanup_tests() -> bool:
 
 def main():
     """Main entry point for the script."""
+    # Clear console
+    import os
+    os.system('cls' if os.name == 'nt' else 'clear')
+
     print("1Password to Apple Passwords Exporter")
     print("="*60)
 

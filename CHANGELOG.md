@@ -11,10 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Duplicate password entry handling**: Entries with identical names are now exported with `_2`, `_3` suffixes to prevent data loss during CSV export
 - **Category 005 (Password) export**: Category 005 items (unused generated passwords) are now properly skipped and not exported
 - **Category 110 (Server) routing**: Server items now correctly export to non_password_data instead of passwords CSV
+- **Statistics accuracy**: Fixed password item count to accurately reflect actual items exported (not incremental counter)
+- **Output directory cleanup**: Outputs folder is now automatically cleaned at the start of each run to prevent stale data
 
 ### Changed
 - Updated all documentation to reflect correct category handling behavior
 - Added post-import duplicate review instructions to usage guide
+- Console now clears at script start for cleaner output display
 
 ## [1.2.0] - 2025-11-25
 
