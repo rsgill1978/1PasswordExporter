@@ -5,6 +5,17 @@ All notable changes to the 1Password to Apple Passwords Exporter will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+- **Duplicate password entry handling**: Entries with identical names are now exported with `_2`, `_3` suffixes to prevent data loss during CSV export
+- **Category 005 (Password) export**: Category 005 items (unused generated passwords) are now properly skipped and not exported
+- **Category 110 (Server) routing**: Server items now correctly export to non_password_data instead of passwords CSV
+
+### Changed
+- Updated all documentation to reflect correct category handling behavior
+- Added post-import duplicate review instructions to usage guide
+
 ## [1.2.0] - 2025-11-25
 
 ### Changed

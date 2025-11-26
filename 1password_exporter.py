@@ -157,6 +157,9 @@ class PasswordExporter:
         """Export password items to Apple Passwords CSV format."""
         password_items = [item for item in items if self.is_password_item(item)]
 
+        # Track duplicate titles
+        title_counts = {}
+
         with open(self.passwords_csv_path, 'w', newline='', encoding='utf-8') as csvfile:
             fieldnames = ['Title', 'URL', 'Username', 'Password', 'Notes', 'OTPAuth']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
@@ -165,7 +168,15 @@ class PasswordExporter:
 
             for item in password_items:
                 overview = item.get("overview", {})
-                title = overview.get("title", "Untitled")
+                base_title = overview.get("title", "Untitled")
+
+                # Handle duplicate titles
+                if base_title in title_counts:
+                    title_counts[base_title] += 1
+                    title = f"{base_title}_{title_counts[base_title]}"
+                else:
+                    title_counts[base_title] = 1
+                    title = base_title
 
                 row = {
                     'Title': title,
