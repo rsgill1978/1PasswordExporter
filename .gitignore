@@ -105,3 +105,7 @@ yarn-error.log*
 
 # Private setup instructions
 .github/SETUP.md
+
+# Input and output directories
+inputs/
+outputs/
