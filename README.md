@@ -443,8 +443,8 @@ Items are classified by their `categoryUuid` field:
 | Category UUID | Category Name | Export Destination |
 |--------------|---------------|-------------------|
 | 001 | Login | passwords CSV |
-| 005 | Password | passwords CSV |
-| 110 | Server | passwords CSV |
+| 005 | Password | do not export |
+| 110 | Server | non_password_data |
 | 002 | Credit Card | non_password_data |
 | 003 | Secure Note | non_password_data |
 | 004 | Identity | non_password_data |

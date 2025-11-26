@@ -621,8 +621,8 @@ Modify the `is_password_item()` method to include only desired categories:
 def is_password_item(self, item: Dict[str, Any]) -> bool:
     category_uuid = item.get("categoryUuid", "")
 
-    # Only export logins and servers
-    password_categories = ["001", "110"]  # Remove "005" if you don't want Password items
+    # Only export logins (category 005 = unused generated passwords, 110 = servers go to non_password_data)
+    password_categories = ["001"]  # Login only
 
     return category_uuid in password_categories
 ```

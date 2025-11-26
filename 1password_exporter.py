@@ -146,8 +146,10 @@ class PasswordExporter:
         """Determine if an item should be included in the passwords CSV."""
         category_uuid = item.get("categoryUuid", "")
 
-        # Categories that contain password/login information
-        password_categories = ["001", "005", "110"]  # Login, Password, Server
+        # Only export Login items to passwords CSV
+        # 005 (Password) = unused generated passwords, not exported
+        # 110 (Server) = exported to non_password_data instead
+        password_categories = ["001"]  # Login only
 
         return category_uuid in password_categories
 
@@ -488,6 +490,10 @@ class PasswordExporter:
                             self.stats["total_items"] += 1
                             category_uuid = item.get("categoryUuid", "unknown")
                             category_name = self.CATEGORY_NAMES.get(category_uuid, f"Category_{category_uuid}")
+
+                            # Skip category 005 (Password) - unused generated passwords
+                            if category_uuid == "005":
+                                continue
 
                             if not self.is_password_item(item):
                                 # Export non-password data (includes attachment extraction)

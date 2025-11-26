@@ -174,24 +174,21 @@ The first stable release of the 1Password to Apple Passwords Exporter provides c
 
 #### Supported Item Categories
 - 001: Login → passwords CSV
-- 002: Password → passwords CSV
-- 003: Credit Card → non_password_data
-- 004: Secure Note → non_password_data
-- 005: Identity → non_password_data
-- 006: Bank Account → non_password_data
-- 007: Database → non_password_data
-- 008: Driver License → non_password_data
-- 101: SSH Key → non_password_data
-- 102: API Credential → non_password_data
-- 103: Software License → non_password_data
-- 104: Wireless Router → non_password_data
-- 105: Reward Program → non_password_data
+- 002: Credit Card → non_password_data
+- 003: Secure Note → non_password_data
+- 004: Identity → non_password_data
+- 005: Password → do not export (unused generated passwords)
+- 006: Document → non_password_data
+- 100: Software License → non_password_data
+- 101: Bank Account → non_password_data
+- 103: Driver License → non_password_data
+- 105: Membership → non_password_data
 - 106: Passport → non_password_data
-- 107: Social Security Number → non_password_data
-- 108: Medical Record → non_password_data
-- 109: Membership → non_password_data
-- 110: Document → non_password_data
-- 111: Server → passwords CSV
+- 107: Reward Program → non_password_data
+- 108: Social Security Number → non_password_data
+- 109: Wireless Router → non_password_data
+- 110: Server → non_password_data
+- 111: Database → non_password_data
 - 112: Email Account → non_password_data
 
 #### File Format Specifications
