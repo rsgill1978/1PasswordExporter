@@ -418,6 +418,7 @@ This item has 3 attachment(s) in this folder:
 
 **Key features:**
 - **Clean formatting** - no redundant data type labels (e.g., "String:", "Date:", "URL:")
+- **No empty fields** - only fields with actual data are shown, eliminating clutter
 - **Instantly readable** on any device (phone, desktop, tablet)
 - **No special software needed** - opens in any text viewer
 - **Searchable** by Spotlight/Windows Search

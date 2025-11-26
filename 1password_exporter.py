@@ -368,12 +368,12 @@ class PasswordExporter:
         sections = details.get("sections", [])
 
         if sections:
-            content_lines.append("DETAILS")
+            # Collect detail lines first to check if there's any content
+            detail_lines = []
 
             for section in sections:
                 section_title = section.get("title", "")
-                if section_title:
-                    content_lines.append(f"\n{section_title}:")
+                section_lines = []
 
                 fields = section.get("fields", [])
                 for field in fields:
@@ -388,11 +388,26 @@ class PasswordExporter:
                     if not field_title:
                         continue
 
-                    # Format the field value
+                    # Format the field value first
                     formatted_value = self.format_field_value(field_value)
-                    content_lines.append(f"{field_title}: {formatted_value}")
 
-            content_lines.append("")
+                    # Skip only if formatted value is empty, None, or placeholder text after formatting
+                    if not formatted_value or formatted_value.strip() in ["", "(empty)", "None"]:
+                        continue
+
+                    section_lines.append(f"{field_title}: {formatted_value}")
+
+                # Only add section if it has content
+                if section_lines:
+                    if section_title:
+                        detail_lines.append(f"\n{section_title}:")
+                    detail_lines.extend(section_lines)
+
+            # Only add DETAILS header if there's actual content
+            if detail_lines:
+                content_lines.append("DETAILS")
+                content_lines.extend(detail_lines)
+                content_lines.append("")
 
         # Check for attachments and extract them to the same folder
         attachment_files = self.extract_attachment_to_folder(zip_ref, item, item_folder)
