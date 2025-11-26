@@ -4,7 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.6+](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/downloads/)
-[![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows%20%7C%20Linux-lightgrey.svg)](https://github.com/yourusername/1PasswordExporter)
+[![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows%20%7C%20Linux-lightgrey.svg)](https://github.com/rsgill1978/1PasswordExporter)
 [![Support](https://img.shields.io/badge/Support-Buy%20Me%20a%20Coffee-yellow.svg)](https://www.buymeacoffee.com/rsgill)
 
 **Keywords**: 1Password exporter, Apple Passwords migration, password manager migration, 1Password to Apple Passwords, .1pux converter, password export tool, 1Password alternative, iCloud Keychain import, password migration tool, free password exporter
@@ -67,7 +67,7 @@ Switching from 1Password to Apple Passwords (macOS Sequoia 15.0+, iOS 18.0+)? Th
 
 ### Non-Password Data Organization
 - Extracts and organizes items by category (Credit Cards, Identities, Documents, etc.)
-- Exports data as **human-readable plain text files** optimized for NordLocker storage
+- Exports data as **human-readable plain text files** for secure storage
 - Each item gets its own folder containing a .txt file and any attachments
 - Excludes unnecessary metadata (timestamps, access history)
 - Maintains logical folder structure for efficient data management
@@ -381,44 +381,34 @@ Non-password items are exported as human-readable plain text files. Each item ge
 **Example text file format:**
 
 ```
-================================================================================
 Adobe Photoshop CC 2024
-================================================================================
 
 BASIC INFORMATION
---------------------------------------------------------------------------------
 Category: Software License
 URL: https://adobe.com
 
 NOTES
---------------------------------------------------------------------------------
 Annual subscription - renews March 2026
 Login: john.doe@example.com
 
 DETAILS
---------------------------------------------------------------------------------
 license key: XXXX-XXXX-XXXX-XXXX-XXXX
 version: CC 2024
 
 Customer:
-----------------------------------------
 licensed to: John Doe
 registered email: john.doe@example.com
 
 Order:
-----------------------------------------
 purchase date: 2024-03-15
 order number: ORD-123456789
 
 ATTACHMENTS
---------------------------------------------------------------------------------
 This item has 3 attachment(s) in this folder:
 
   • license_certificate.pdf
   • purchase_receipt.pdf
   • installation_guide.pdf
-
-================================================================================
 ```
 
 **Key features:**
@@ -427,10 +417,14 @@ This item has 3 attachment(s) in this folder:
 - **No special software needed** - opens in any text viewer
 - **Searchable** by Spotlight/Windows Search
 - **Copy-paste friendly** - license keys and credentials copy cleanly
-- **NordLocker optimized** - can preview without downloading
+- **Cloud storage friendly** - can preview without downloading
 - **Smart field handling** - dates formatted as YYYY-MM-DD, attachments listed separately
 
 ## Technical Details
+
+For comprehensive technical documentation, see:
+- **[1Password .1pux Format Specification](docs/1pux/1pux.md)** - Complete technical details of the .1pux file format
+- **[Apple Passwords CSV Import Format](docs/ApplePasswords/ApplePasswords.md)** - Detailed CSV format requirements for Apple Passwords
 
 ### 1pux Format Processing
 
@@ -773,4 +767,4 @@ See [FAQ.md](FAQ.md) for more questions and detailed answers.
 **Python Compatibility**: 3.6+
 **Platform**: Cross-platform (macOS, Windows, Linux)
 
-**Found this helpful?** [Support the project](https://www.paypal.com/donate/?business=GMQLBEXCL6DJY&no_recurring=0&currency_code=USD)
+**Found this helpful?** [☕ Buy me a coffee](https://www.buymeacoffee.com/rsgill)
