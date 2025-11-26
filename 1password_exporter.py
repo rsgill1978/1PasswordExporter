@@ -323,14 +323,11 @@ class PasswordExporter:
 
         # Build human-readable text content
         content_lines = []
-        content_lines.append("=" * 80)
         content_lines.append(f"{title}")
-        content_lines.append("=" * 80)
         content_lines.append("")
 
         # Basic metadata
         content_lines.append("BASIC INFORMATION")
-        content_lines.append("-" * 80)
         content_lines.append(f"Category: {category_name}")
 
         url = self.extract_url(item)
@@ -343,7 +340,6 @@ class PasswordExporter:
         notes = self.extract_notes(item)
         if notes:
             content_lines.append("NOTES")
-            content_lines.append("-" * 80)
             content_lines.append(notes)
             content_lines.append("")
 
@@ -353,13 +349,11 @@ class PasswordExporter:
 
         if sections:
             content_lines.append("DETAILS")
-            content_lines.append("-" * 80)
 
             for section in sections:
                 section_title = section.get("title", "")
                 if section_title:
                     content_lines.append(f"\n{section_title}:")
-                    content_lines.append("-" * 40)
 
                 fields = section.get("fields", [])
                 for field in fields:
@@ -385,14 +379,11 @@ class PasswordExporter:
 
         if attachment_files:
             content_lines.append("ATTACHMENTS")
-            content_lines.append("-" * 80)
             content_lines.append(f"This item has {len(attachment_files)} attachment(s) in this folder:")
             content_lines.append("")
             for filename in attachment_files:
                 content_lines.append(f"  • {filename}")
             content_lines.append("")
-
-        content_lines.append("=" * 80)
 
         # Write text file
         with open(text_path, 'w', encoding='utf-8') as f:
