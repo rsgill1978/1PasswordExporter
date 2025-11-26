@@ -694,7 +694,7 @@ If this tool saved you time and money, consider buying me a coffee:
 
 **[☕ Buy Me a Coffee](https://www.buymeacoffee.com/rsgill)** ← Click here to support
 
-<a href="https://www.buymeacoffee.com/rsgill" target="_blank"><img src="assets/buymeacoffee-qr.png" alt="Buy Me a Coffee QR Code" width="200"></a>
+<a href="https://www.buymeacoffee.com/rsgill" target="_blank"><img src=".github/assets/buymeacoffee-qr.png" alt="Buy Me a Coffee QR Code" width="200"></a>
 
 Or scan the QR code above. Your support helps maintain and improve this tool!
 
