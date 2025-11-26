@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Category 110 (Server) routing**: Server items now correctly export to non_password_data instead of passwords CSV
 - **Statistics accuracy**: Fixed password item count to accurately reflect actual items exported (not incremental counter)
 - **Output directory cleanup**: Outputs folder is now automatically cleaned at the start of each run to prevent stale data
+- **Empty field clutter**: Text files no longer include empty, None, or unused fields - significantly cleaner output for mobile viewing
 
 ### Changed
 - Updated all documentation to reflect correct category handling behavior
