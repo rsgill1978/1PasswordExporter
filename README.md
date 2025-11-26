@@ -64,6 +64,7 @@ Switching from 1Password to Apple Passwords (macOS Sequoia 15.0+, iOS 18.0+)? Th
 - Preserves usernames, passwords, URLs, notes, and TOTP secrets
 - Handles special characters and multi-line notes correctly
 - Ensures proper CSV quoting for Apple Passwords compatibility
+- Automatically handles duplicate entry names (appends _2, _3, etc. to prevent data loss)
 
 ### Non-Password Data Organization
 - Extracts and organizes items by category (Credit Cards, Identities, Documents, etc.)
@@ -309,6 +310,10 @@ python3 1password_exporter.py inputs/ABCDEF123456.1pux
 4. Navigate to `outputs/exported_passwords.csv` in the script directory
 5. Review the import preview and confirm
 6. Wait for synchronization to complete
+7. **IMPORTANT**: Manually check for duplicate entries in Apple Passwords
+   - Entries with identical names in 1Password are exported as `name`, `name_2`, `name_3`, etc.
+   - Apple Passwords may create additional duplicates during import
+   - Review and merge or delete duplicates as needed
 
 ### Step 4: Secure Cleanup
 
@@ -443,8 +448,8 @@ Items are classified by their `categoryUuid` field:
 | Category UUID | Category Name | Export Destination |
 |--------------|---------------|-------------------|
 | 001 | Login | passwords CSV |
-| 005 | Password | passwords CSV |
-| 110 | Server | passwords CSV |
+| 005 | Password | do not export |
+| 110 | Server | non_password_data |
 | 002 | Credit Card | non_password_data |
 | 003 | Secure Note | non_password_data |
 | 004 | Identity | non_password_data |
@@ -660,7 +665,8 @@ If Apple Passwords reports errors:
 3. **No Custom Fields**: Only six standard columns supported
 4. **URL Format**: Must include protocol or autofill may not work
 5. **No Metadata**: Creation dates, modification dates not preserved
-6. **Character Limits**:
+6. **Duplicate Handling**: Entries with identical names are exported with `_2`, `_3` suffixes to prevent data loss. Manual review recommended after import.
+7. **Character Limits**:
    - Titles: 255 characters
    - URLs: 2048 characters
    - Passwords: 128 characters

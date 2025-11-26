@@ -52,6 +52,11 @@ class PasswordExporter:
         self.output_dir = output_dir if output_dir else os.path.join(script_dir, "outputs")
         self.timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
+        # Clean output directory if it exists
+        if os.path.exists(self.output_dir):
+            import shutil
+            shutil.rmtree(self.output_dir)
+
         # Create output directories
         self.passwords_csv_path = os.path.join(self.output_dir, "exported_passwords.csv")
         self.non_password_dir = os.path.join(self.output_dir, "non_password_data")
@@ -61,6 +66,7 @@ class PasswordExporter:
             "total_items": 0,
             "password_items": 0,
             "non_password_items": 0,
+            "skipped_items": 0,
             "attachments_extracted": 0,
             "errors": []
         }
@@ -146,14 +152,19 @@ class PasswordExporter:
         """Determine if an item should be included in the passwords CSV."""
         category_uuid = item.get("categoryUuid", "")
 
-        # Categories that contain password/login information
-        password_categories = ["001", "005", "110"]  # Login, Password, Server
+        # Only export Login items to passwords CSV
+        # 005 (Password) = unused generated passwords, not exported
+        # 110 (Server) = exported to non_password_data instead
+        password_categories = ["001"]  # Login only
 
         return category_uuid in password_categories
 
     def export_passwords_to_csv(self, items: List[Dict[str, Any]]):
         """Export password items to Apple Passwords CSV format."""
         password_items = [item for item in items if self.is_password_item(item)]
+
+        # Track duplicate titles
+        title_counts = {}
 
         with open(self.passwords_csv_path, 'w', newline='', encoding='utf-8') as csvfile:
             fieldnames = ['Title', 'URL', 'Username', 'Password', 'Notes', 'OTPAuth']
@@ -163,7 +174,15 @@ class PasswordExporter:
 
             for item in password_items:
                 overview = item.get("overview", {})
-                title = overview.get("title", "Untitled")
+                base_title = overview.get("title", "Untitled")
+
+                # Handle duplicate titles
+                if base_title in title_counts:
+                    title_counts[base_title] += 1
+                    title = f"{base_title}_{title_counts[base_title]}"
+                else:
+                    title_counts[base_title] = 1
+                    title = base_title
 
                 row = {
                     'Title': title,
@@ -175,8 +194,9 @@ class PasswordExporter:
                 }
 
                 writer.writerow(row)
-                self.stats["password_items"] += 1
 
+        # Count actual rows written (excluding header)
+        self.stats["password_items"] = len(password_items)
         print(f"Exported {self.stats['password_items']} password items to: {self.passwords_csv_path}")
 
     def sanitize_filename(self, filename: str) -> str:
@@ -489,6 +509,11 @@ class PasswordExporter:
                             category_uuid = item.get("categoryUuid", "unknown")
                             category_name = self.CATEGORY_NAMES.get(category_uuid, f"Category_{category_uuid}")
 
+                            # Skip category 005 (Password) - unused generated passwords
+                            if category_uuid == "005":
+                                self.stats["skipped_items"] += 1
+                                continue
+
                             if not self.is_password_item(item):
                                 # Export non-password data (includes attachment extraction)
                                 self.export_non_password_item(item, category_name, zip_ref)
@@ -509,9 +534,10 @@ class PasswordExporter:
         print("\n" + "="*60)
         print("EXPORT SUMMARY")
         print("="*60)
-        print(f"Total items processed: {self.stats['total_items']}")
-        print(f"Password items exported: {self.stats['password_items']}")
-        print(f"Non-password items exported: {self.stats['non_password_items']}")
+        print(f"Total items in .1pux file: {self.stats['total_items']}")
+        print(f"Password items exported (CSV): {self.stats['password_items']}")
+        print(f"Non-password items exported (text files): {self.stats['non_password_items']}")
+        print(f"Items skipped (category 005 - unused passwords): {self.stats['skipped_items']}")
         print(f"Attachments extracted: {self.stats['attachments_extracted']}")
 
         if self.stats["errors"]:
@@ -857,6 +883,10 @@ def cleanup_tests() -> bool:
 
 def main():
     """Main entry point for the script."""
+    # Clear console
+    import os
+    os.system('cls' if os.name == 'nt' else 'clear')
+
     print("1Password to Apple Passwords Exporter")
     print("="*60)
 

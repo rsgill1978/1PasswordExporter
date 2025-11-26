@@ -5,6 +5,20 @@ All notable changes to the 1Password to Apple Passwords Exporter will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+- **Duplicate password entry handling**: Entries with identical names are now exported with `_2`, `_3` suffixes to prevent data loss during CSV export
+- **Category 005 (Password) export**: Category 005 items (unused generated passwords) are now properly skipped and not exported
+- **Category 110 (Server) routing**: Server items now correctly export to non_password_data instead of passwords CSV
+- **Statistics accuracy**: Fixed password item count to accurately reflect actual items exported (not incremental counter)
+- **Output directory cleanup**: Outputs folder is now automatically cleaned at the start of each run to prevent stale data
+
+### Changed
+- Updated all documentation to reflect correct category handling behavior
+- Added post-import duplicate review instructions to usage guide
+- Console now clears at script start for cleaner output display
+
 ## [1.2.0] - 2025-11-25
 
 ### Changed
@@ -174,24 +188,21 @@ The first stable release of the 1Password to Apple Passwords Exporter provides c
 
 #### Supported Item Categories
 - 001: Login → passwords CSV
-- 002: Password → passwords CSV
-- 003: Credit Card → non_password_data
-- 004: Secure Note → non_password_data
-- 005: Identity → non_password_data
-- 006: Bank Account → non_password_data
-- 007: Database → non_password_data
-- 008: Driver License → non_password_data
-- 101: SSH Key → non_password_data
-- 102: API Credential → non_password_data
-- 103: Software License → non_password_data
-- 104: Wireless Router → non_password_data
-- 105: Reward Program → non_password_data
+- 002: Credit Card → non_password_data
+- 003: Secure Note → non_password_data
+- 004: Identity → non_password_data
+- 005: Password → do not export (unused generated passwords)
+- 006: Document → non_password_data
+- 100: Software License → non_password_data
+- 101: Bank Account → non_password_data
+- 103: Driver License → non_password_data
+- 105: Membership → non_password_data
 - 106: Passport → non_password_data
-- 107: Social Security Number → non_password_data
-- 108: Medical Record → non_password_data
-- 109: Membership → non_password_data
-- 110: Document → non_password_data
-- 111: Server → passwords CSV
+- 107: Reward Program → non_password_data
+- 108: Social Security Number → non_password_data
+- 109: Wireless Router → non_password_data
+- 110: Server → non_password_data
+- 111: Database → non_password_data
 - 112: Email Account → non_password_data
 
 #### File Format Specifications

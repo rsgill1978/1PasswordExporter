@@ -360,14 +360,19 @@ Yes, it is highly recommended:
 
 ### How do I handle duplicate passwords?
 
-During import, Apple Passwords will:
-1. Detect duplicates (matching URL + username)
-2. Prompt you to choose: Overwrite, Skip, or Merge
-3. Review each carefully before confirming
+**This script automatically handles entries with identical names:**
+- If you have multiple entries named "acme" in 1Password, they will be exported as `acme`, `acme_2`, `acme_3`, etc.
+- This prevents data loss during export
 
-To avoid duplicates:
-- Export existing Apple Passwords entries first
-- Manually merge in a spreadsheet
+**After importing to Apple Passwords:**
+1. **Manually review for duplicates** - Apple Passwords may create additional duplicates during import
+2. Check entries with `_2`, `_3` suffixes and compare them
+3. Merge or delete duplicates as needed
+4. Apple Passwords will also detect duplicates (matching URL + username) and prompt you to choose: Overwrite, Skip, or Merge
+
+**To avoid duplicates before export:**
+- Clean up duplicate entries in 1Password first
+- Export existing Apple Passwords entries and merge in a spreadsheet
 - Re-import the consolidated list
 
 ### Can I import to multiple devices?
@@ -621,8 +626,8 @@ Modify the `is_password_item()` method to include only desired categories:
 def is_password_item(self, item: Dict[str, Any]) -> bool:
     category_uuid = item.get("categoryUuid", "")
 
-    # Only export logins and servers
-    password_categories = ["001", "110"]  # Remove "005" if you don't want Password items
+    # Only export logins (category 005 = unused generated passwords, 110 = servers go to non_password_data)
+    password_categories = ["001"]  # Login only
 
     return category_uuid in password_categories
 ```
