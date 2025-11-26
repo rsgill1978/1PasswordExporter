@@ -422,6 +422,10 @@ This item has 3 attachment(s) in this folder:
 
 ## Technical Details
 
+For comprehensive technical documentation, see:
+- **[1Password .1pux Format Specification](docs/1pux/1pux.md)** - Complete technical details of the .1pux file format
+- **[Apple Passwords CSV Import Format](docs/ApplePasswords/ApplePasswords.md)** - Detailed CSV format requirements for Apple Passwords
+
 ### 1pux Format Processing
 
 The `.1pux` file is a standard ZIP archive containing:
